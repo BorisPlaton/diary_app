@@ -1,3 +1,26 @@
+{% macro post(title, text, name, date, time) %}
+<div class="post">
+
+    <div class="inner_post">
+
+        <div class="post_title_div">
+            <span class="post_title">{{ title }}</span>
+        </div>
+
+        <div class="post_text">
+            <p>{{ text }}</p>
+        </div>
+
+        <div class="post_footer">
+            <p>{{ name }}, {{ date }}, {{ time }}</p>
+        </div>
+
+    </div>
+
+</div>
+{% endmacro %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +28,42 @@
     <title>Title</title>
 </head>
 <body>
+
+<div class="page">
+
+    <header>
+
+        <div class="inner_header">
+
+            <div class="logo">
+                <span class="logo_text">Diary</span>
+            </div>
+
+            <div class="menu">
+                <a href="{{ url_for('notes')}}">My notes</a>
+            </div>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <div class="inner_main">
+
+            <div class="text_field">
+                
+            </div>
+
+            {{ post("Моё утро", "Сегодня проснулся с хорошим настроением!", "Кирилл", "21-09-22", "12:04") }}
+
+        </div>
+
+    </main>
+
+    <footer></footer>
+
+</div>
 
 </body>
 </html>
