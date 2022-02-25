@@ -54,7 +54,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 15px 15px 15px;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid grey;
 }
 
 .logo_text{
@@ -82,6 +82,38 @@ main {
 
 
 
+/* ------- TEXTAREA -------*/
+
+.text_field {
+	height: 10vh;
+}
+
+textarea {
+	font-family: Cormorant-Regular;
+	font-size: 24px;
+	margin: 0 auto;
+	resize: none;
+	border: none;
+	border-radius: 10px;
+	background: #d1d1d1;
+	padding: 10px;
+	height: 100%;
+	width: 100%;
+	transition: all 0.3s ease-out;
+}
+
+textarea:hover {
+	background: #c4c4c4;
+}
+
+textarea:focus {
+  	outline: none;
+	background: #c4c4c4;
+}
+
+/* ----------------------------- */
+
+
 
 /* ------- POST -------*/
 
@@ -89,7 +121,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
-	background: #dbdbdb;
+	background: #d1d1d1;
 	border-radius: 10px;
 	margin: 25px 0;
 }
@@ -108,7 +140,9 @@ main {
 	padding-bottom: 20px;
 }
 
-
+.post_footer {
+	font-size: 20px;
+}
 
 /* ----------------------------- */
 

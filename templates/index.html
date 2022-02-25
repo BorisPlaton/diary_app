@@ -1,4 +1,4 @@
-{% macro post(title, text, name, date, time) %}
+{% macro post(title, text, date, time) %}
 <div class="post">
 
     <div class="inner_post">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="post_footer">
-            <p>{{ name }}, {{ date }}, {{ time }}</p>
+            <p>{{ date }}, {{ time }}</p>
         </div>
 
     </div>
@@ -42,7 +42,8 @@
             </div>
 
             <div class="menu">
-                <a href="{{ url_for('notes')}}">My notes</a>
+                <a href="{{ url_for('notes')}}">My notes</a> |
+                <a href="{{ url_for('new_note')}}">Write a new note</a>
             </div>
 
         </div>
@@ -54,10 +55,10 @@
         <div class="inner_main">
 
             <div class="text_field">
-                
+                <textarea placeholder="Напишите что-то"></textarea>
             </div>
 
-            {{ post("Моё утро", "Сегодня проснулся с хорошим настроением!", "Кирилл", "21-09-22", "12:04") }}
+            {{ post("Моё утро", "Сегодня проснулся с хорошим настроением!", "21-09-22", "12:04") }}
 
         </div>
 
