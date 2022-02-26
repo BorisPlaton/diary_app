@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import datetime
+import sqlite3
 
 
 def rvs(mas: list):
@@ -10,19 +11,12 @@ def rvs(mas: list):
 
 app = Flask(__name__)
 
-posts = []
-
 
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "GET":
-        print(posts)
-        return render_template("index.html", posts=rvs(posts))
+        return render_template("index.html")
     else:
-        posts.append({"title": request.form["title"],
-                      "text": request.form["text"],
-                      "date": datetime.datetime.now().strftime("%Y-%m-%d"),
-                      "time": datetime.datetime.now().strftime("%H:%M:%S"), })
         return redirect(url_for("index"))
 
 
