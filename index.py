@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 import datetime
 
+
+def rvs(mas: list):
+    a = mas
+    a.reverse()
+    return a
+
+
 app = Flask(__name__)
 
 posts = []
@@ -10,12 +17,12 @@ posts = []
 def index():
     if request.method == "GET":
         print(posts)
-        return render_template("index.html", posts=posts)
+        return render_template("index.html", posts=rvs(posts))
     else:
         posts.append({"title": request.form["title"],
-                          "text": request.form["text"],
-                          "date": datetime.datetime.now(),
-                          "time": datetime.datetime.now().strftime("%H:%M:%S"), })
+                      "text": request.form["text"],
+                      "date": datetime.datetime.now().strftime("%Y-%m-%d"),
+                      "time": datetime.datetime.now().strftime("%H:%M:%S"), })
         return redirect(url_for("index"))
 
 

@@ -62,8 +62,8 @@
         <div class="inner_main">
             {% block content %}
 
-            {% for post in posts %}
-            {{ post(post.title, post.text, post.date, post.time) }}
+            {% for n in posts %}
+            {{ post(n.title, n.text, n.date, n.time) }}
             {% endfor %}
 
             {% endblock %}
