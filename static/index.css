@@ -69,11 +69,14 @@ header {
 /* ------- MAIN ------- */
 
 main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 	padding: 40px 20px;
 }
 
 .inner_main {
-	max-width: 800px;
+	width: 800px;
 	margin: 0 auto;
 	text-align: justify;
 }
@@ -84,17 +87,13 @@ main {
 
 /* ------- TEXTAREA -------*/
 
-.text_field {
-	height: 10vh;
-}
-
-textarea {
-	font-family: Cormorant-Regular;
+textarea, input, button {
+	font-family: Cormorant-Light;
 	font-size: 24px;
-	margin: 0 auto;
+	margin: 10px 0 0 0;
 	resize: none;
 	border: none;
-	border-radius: 10px;
+	border-radius: 7px;
 	background: #d1d1d1;
 	padding: 10px;
 	height: 100%;
@@ -102,14 +101,35 @@ textarea {
 	transition: all 0.3s ease-out;
 }
 
-textarea:hover {
+textarea:hover, input:hover {
 	background: #c4c4c4;
 }
 
-textarea:focus {
+textarea:focus, input:focus {
   	outline: none;
 	background: #c4c4c4;
 }
+
+textarea {
+	height: 65vh;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+	padding-left: 15px;
+}
+button {
+	font-size: 20px;
+	width: 100px;
+	cursor: pointer;
+}
+
+input {
+	font-size: 28px;
+}
+
+
 
 /* ----------------------------- */
 
@@ -122,8 +142,8 @@ textarea:focus {
 	flex-direction: column;
 	padding: 10px;
 	background: #d1d1d1;
-	border-radius: 10px;
-	margin: 25px 0;
+	border-radius: 7px;
+	margin-top: 10px;
 }
 
 .post_title_div {
@@ -142,18 +162,6 @@ textarea:focus {
 
 .post_footer {
 	font-size: 20px;
-}
-
-/* ----------------------------- */
-
-
-
-
-/* ------- FOOTER ------- */
-
-footer {
-	margin-top: auto;
-	padding: 20px;
 }
 
 /* ----------------------------- */

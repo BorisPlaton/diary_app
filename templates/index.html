@@ -24,10 +24,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
+
     <title>Diary</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='fonts.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
 </head>
 <body>
 
@@ -41,10 +44,14 @@
                 <span class="logo_text">Diary</span>
             </div>
 
+        {% block menu %}
+
             <div class="menu">
                 <a href="{{ url_for('notes')}}">My notes</a> |
                 <a href="{{ url_for('new_note')}}">Write a new note</a>
             </div>
+
+        {% endblock %}
 
         </div>
 
@@ -53,13 +60,11 @@
     <main>
 
         <div class="inner_main">
-
-            <div class="text_field">
-                <textarea placeholder="Напишите что-то"></textarea>
-            </div>
+        {% block content %}
 
             {{ post("Моё утро", "Сегодня проснулся с хорошим настроением!", "21-09-22", "12:04") }}
 
+        {% endblock %}
         </div>
 
     </main>
