@@ -44,14 +44,14 @@
                 <span class="logo_text">Diary</span>
             </div>
 
-        {% block menu %}
+            {% block menu %}
 
             <div class="menu">
                 <a href="{{ url_for('notes')}}">My notes</a> |
                 <a href="{{ url_for('new_note')}}">Write a new note</a>
             </div>
 
-        {% endblock %}
+            {% endblock %}
 
         </div>
 
@@ -60,11 +60,13 @@
     <main>
 
         <div class="inner_main">
-        {% block content %}
+            {% block content %}
 
-            {{ post("Моё утро", "Сегодня проснулся с хорошим настроением!", "21-09-22", "12:04") }}
+            {% for post in posts %}
+            {{ post(post.title, post.text, post.date, post.time) }}
+            {% endfor %}
 
-        {% endblock %}
+            {% endblock %}
         </div>
 
     </main>

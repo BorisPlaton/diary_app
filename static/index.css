@@ -2,7 +2,7 @@
 
 body {
 	margin: 0;
-	font-family: Cormorant-Regular;
+	font-family: Times New Roman;
 	font-size: 24px;
 	color: black;
 }
@@ -71,7 +71,6 @@ header {
 main {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	padding: 40px 20px;
 }
 
@@ -88,7 +87,7 @@ main {
 /* ------- TEXTAREA -------*/
 
 textarea, input, button {
-	font-family: Cormorant-Light;
+	font-family: Times New Roman;
 	font-size: 24px;
 	margin: 10px 0 0 0;
 	resize: none;
@@ -114,18 +113,25 @@ textarea {
 	height: 65vh;
 }
 
-.button {
-	display: flex;
-	justify-content: flex-end;
-	padding-left: 15px;
+.inner_button {
+	width: 500px;
+	margin-left: auto;
 }
-button {
+
+.button input {
+	border-radius: ;
 	font-size: 20px;
-	width: 100px;
+	width: auto;
 	cursor: pointer;
 }
 
-input {
+.button input:hover {
+	margin-left: 10px;
+	background: #4d898f;
+	color: #fff;
+}
+
+.title input {
 	font-size: 28px;
 }
 
@@ -151,7 +157,6 @@ input {
 }
 
 .post_title {
-	font-family: Cormorant-SemiBold;
 	font-size: 30px;
 }
 

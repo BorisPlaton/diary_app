@@ -1,12 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import datetime
 
 app = Flask(__name__)
 
+posts = []
 
-@app.route("/")
+
+@app.route("/", methods=["POST", "GET"])
 def index():
-    return render_template("index.html")
+    if request.method == "GET":
+        print(posts)
+        return render_template("index.html", posts=posts)
+    else:
+        posts.append({"title": request.form["title"],
+                          "text": request.form["text"],
+                          "date": datetime.datetime.now(),
+                          "time": datetime.datetime.now().strftime("%H:%M:%S"), })
+        return redirect(url_for("index"))
 
 
 @app.route("/new_note")
