@@ -63,7 +63,7 @@
             {% block content %}
 
             {% for n in posts %}
-            {{ post(n.title, n.text, n.date, n.time) }}
+            {{ post(n.title, n.post, n.date, n.time) }}
             {% endfor %}
 
             {% endblock %}

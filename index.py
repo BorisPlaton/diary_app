@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 def connect_db():
-    sql = sqlite3.connect("posts.db")
+    sql = sqlite3.connect("post.db")
     sql.row_factory = sqlite3.Row
     return sql
 
@@ -23,17 +23,36 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/")
 def index():
-    if request.method == "GET":
-        return render_template("index.html")
-    else:
-        return redirect(url_for("index"))
+    db = get_db()
+    cur = db.execute("""
+    select * from post;
+    """)
+    res = cur.fetchall()
+    return render_template("index.html", posts=res)
 
 
-@app.route("/new_note")
+@app.route("/new_note", methods=["GET", "POST"])
 def new_note():
-    return render_template("new_note.html")
+    if request.method == "GET":
+        return render_template("new_note.html")
+    else:
+        now = datetime.datetime.now()
+
+        post = request.form["text"]
+        title = request.form["title"]
+        date = now.strftime("%Y-%m-%d")
+        time = now.strftime("%H:%M:%S")
+        print(time, date)
+        db = get_db()
+        db.execute("""
+            insert into post (post, title, date, time)
+            values
+                (?, ?, ?, ?);
+        """, [post, title, date, time])
+        db.commit()
+        return redirect(url_for("index"))
 
 
 @app.route("/notes")
