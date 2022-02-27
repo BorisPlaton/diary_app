@@ -18,11 +18,11 @@
 <form action="{{ url_for('new_note') }}" method="post">
 
     <div class="title">
-        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="title" placeholder="Title" autocomplete="off" required>
     </div>
 
     <div class="text_field">
-        <textarea name="text" placeholder="Your thoughts" required></textarea>
+        <textarea name="text" placeholder="Your thoughts" spellcheck="false" required></textarea>
     </div>
 
     <div class="button">

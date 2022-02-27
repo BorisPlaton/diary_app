@@ -23,9 +23,9 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/", methods=["GET", "POST" ])
 def index():
-    if request.method == "POST":
+    if request.method == "GET":
         db = get_db()
         cur = db.execute("""
         select * from post
@@ -34,12 +34,11 @@ def index():
         res = cur.fetchall()
         return render_template("index.html", posts=res)
     else:
-        id_post = request.form["id"]
         db = get_db()
         db.execute("""
         delete from post
         where id = ?;
-        """, [id_post])
+        """, [request.form["id"]])
         db.commit()
         return redirect(url_for("index"))
 
@@ -50,12 +49,10 @@ def new_note():
         return render_template("new_note.html")
     else:
         now = datetime.datetime.now()
-
         post = request.form["text"]
         title = request.form["title"]
         date = now.strftime("%Y-%m-%d")
         time = now.strftime("%H:%M:%S")
-        print(time, date)
         db = get_db()
         db.execute("""
             insert into post (post, title, date, time)

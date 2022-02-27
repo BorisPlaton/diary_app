@@ -5,11 +5,13 @@
 
         <div class="post_title_div">
             <div class="inner_title">
+
                 <span class="post_title">{{ title }}</span>
+
                 <form action="{{ url_for('index') }}" method="post">
-<!--                    <input type="submit" name="{{ id }}" value="{{ id }}">-->
-                    <button class="btn" value="{{ id }}"><i class="fa fa-trash"></i></button>
+                    <button type="submit" class="btn" name="id" value="{{ id }}"><i class="fa fa-trash"></i></button>
                 </form>
+
             </div>
         </div>
 
