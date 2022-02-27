@@ -61,6 +61,20 @@ header {
 	font-size: 48px;
 }
 
+.logo_a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.logo_a:hover {
+	color: black;
+}
+
+.logo_a:active {
+	color: black;
+}
+
 /* ----------------------------- */
 
 

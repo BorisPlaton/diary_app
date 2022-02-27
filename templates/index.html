@@ -49,10 +49,11 @@
 
         <div class="inner_header">
 
-            <div class="logo">
-                <span class="logo_text">Diary</span>
-            </div>
-
+            <a class="logo_a" href="{{ url_for('index') }}">
+                <div class="logo">
+                    <span class="logo_text">Diary</span>
+                </div>
+            </a>
             {% block menu %}
 
             <div class="menu">
