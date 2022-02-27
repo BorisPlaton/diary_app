@@ -27,7 +27,8 @@ def close_db(error):
 def index():
     db = get_db()
     cur = db.execute("""
-    select * from post;
+    select * from post
+    order by id desc;
     """)
     res = cur.fetchall()
     return render_template("index.html", posts=res)
