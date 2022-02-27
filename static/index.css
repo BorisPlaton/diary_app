@@ -42,6 +42,7 @@ a:active {
 
 
 
+
 /* ------- HEADER ------- */
 
 header {
@@ -95,6 +96,73 @@ main {
 }
 
 /* ----------------------------- */
+
+
+
+
+/* ------- SEARCHING BAR ------- */
+
+.setup_buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 10px 0 0 0;
+	/* background: grey; */
+}
+
+.inner_set_but, .inner_set_but form  {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	width: 80%;
+	/* background: green; */
+}
+
+.inner_set_but form {
+	width: 60%;
+	/* background: brown; */
+}
+
+.sort_buttons {
+	display: flex;
+	flex-direction: row;
+	/* background: yellow; */
+}
+
+.sort_btn, .search_btn {
+	margin: 0;
+	font-size: 20px;
+	padding: 8px;
+	background: none;
+	height: auto;
+  	cursor: pointer;
+	color: #b5b3b3; 
+  	transition: 0.1s all ease-out;
+}
+
+.sort_btn:hover, .search_btn:hover {
+	color: #616060;
+}
+
+.sort_btn:active, .search_btn:active {
+	color: black;
+}
+
+.search input {
+	margin: 0;
+	font-size: 16px;
+	width: 100%;
+}
+
+.search {
+	width: 100%;
+	margin-left: 15px;
+}
+
+/* ----------------------------- */
+
 
 
 
@@ -152,6 +220,7 @@ textarea {
 
 
 /* ----------------------------- */
+
 
 
 
