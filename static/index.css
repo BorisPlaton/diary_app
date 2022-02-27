@@ -152,12 +152,43 @@ textarea {
 	margin-top: 10px;
 }
 
+.inner_post {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn {
+	width: auto;
+	margin: 0;
+	font-size: 16px;
+	padding: 5px 5px;
+  	border: none;
+  	color: #b5b3b3; 
+  	cursor: pointer;
+  	transition: 0.1s all ease-out;
+}
+
+.btn:hover {
+	color: #616060;
+}
+
+.btn:active {
+	color: black;
+}
+
+.inner_title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .post_title_div {
 	padding-bottom: 10px;
 }
 
 .post_title {
 	font-size: 30px;
+	font-weight: 600;
 }
 
 .post_text {

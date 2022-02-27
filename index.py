@@ -23,15 +23,25 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
-    db = get_db()
-    cur = db.execute("""
-    select * from post
-    order by id desc;
-    """)
-    res = cur.fetchall()
-    return render_template("index.html", posts=res)
+    if request.method == "POST":
+        db = get_db()
+        cur = db.execute("""
+        select * from post
+        order by id desc;
+        """)
+        res = cur.fetchall()
+        return render_template("index.html", posts=res)
+    else:
+        id_post = request.form["id"]
+        db = get_db()
+        db.execute("""
+        delete from post
+        where id = ?;
+        """, [id_post])
+        db.commit()
+        return redirect(url_for("index"))
 
 
 @app.route("/new_note", methods=["GET", "POST"])

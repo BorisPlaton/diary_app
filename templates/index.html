@@ -1,10 +1,16 @@
-{% macro post(title, text, date, time) %}
+{% macro post(id, title, text, date, time) %}
 <div class="post">
 
     <div class="inner_post">
 
         <div class="post_title_div">
-            <span class="post_title">{{ title }}</span>
+            <div class="inner_title">
+                <span class="post_title">{{ title }}</span>
+                <form action="{{ url_for('index') }}" method="post">
+<!--                    <input type="submit" name="{{ id }}" value="{{ id }}">-->
+                    <button class="btn" value="{{ id }}"><i class="fa fa-trash"></i></button>
+                </form>
+            </div>
         </div>
 
         <div class="post_text">
@@ -29,6 +35,7 @@
 
     <title>Diary</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
 </head>
@@ -63,7 +70,7 @@
             {% block content %}
 
             {% for n in posts %}
-            {{ post(n.title, n.post, n.date, n.time) }}
+            {{ post(n.id, n.title, n.post, n.date, n.time) }}
             {% endfor %}
 
             {% endblock %}
