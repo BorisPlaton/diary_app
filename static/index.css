@@ -42,6 +42,7 @@ a:active {
 
 
 
+
 /* ------- HEADER ------- */
 
 header {
@@ -59,6 +60,20 @@ header {
 
 .logo_text{
 	font-size: 48px;
+}
+
+.logo_a {
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.logo_a:hover {
+	color: black;
+}
+
+.logo_a:active {
+	color: black;
 }
 
 /* ----------------------------- */
@@ -80,7 +95,82 @@ main {
 	text-align: justify;
 }
 
+.inner_main .no_posts {
+	/* margin-top: 40px; */
+}
+
+.text_href {
+	text-decoration: underline;
+}
+
 /* ----------------------------- */
+
+
+
+
+/* ------- SEARCHING BAR ------- */
+
+.setup_buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: 9px 0 40px 0;
+	/* background: grey; */
+}
+
+.inner_set_but, .inner_set_but form  {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-content: center;
+	align-items: center;
+	width: 80%;
+	/* background: green; */
+}
+
+.inner_set_but form {
+	width: 75%;
+	/* background: brown; */
+}
+
+.sort_buttons {
+	display: flex;
+	flex-direction: row;
+	/* background: yellow; */
+}
+
+.sort_btn, .search_btn {
+	margin: 0;
+	font-size: 20px;
+	padding: 8px;
+	background: none;
+	height: auto;
+  	cursor: pointer;
+	color: #b5b3b3; 
+  	transition: 0.1s all ease-out;
+}
+
+.sort_btn:hover, .search_btn:hover {
+	color: #616060;
+}
+
+.sort_btn:active, .search_btn:active {
+	color: black;
+}
+
+.search input {
+	margin: 0;
+	font-size: 16px;
+	width: 100%;
+}
+
+.search {
+	width: 100%;
+	margin-left: 15px;
+}
+
+/* ----------------------------- */
+
 
 
 
@@ -127,7 +217,7 @@ textarea {
 
 .button input:hover {
 	margin-left: 10px;
-	background: #4d898f;
+	background: #545454;
 	color: #fff;
 }
 
@@ -141,9 +231,10 @@ textarea {
 
 
 
+
 /* ------- POST -------*/
 
-.post {
+.post, .post_header {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
@@ -152,12 +243,43 @@ textarea {
 	margin-top: 10px;
 }
 
+.inner_post {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn {
+	width: auto;
+	margin: 0;
+	font-size: 16px;
+	padding: 5px 5px;
+  	border: none;
+  	color: #b5b3b3; 
+  	cursor: pointer;
+  	transition: 0.1s all ease-out;
+}
+
+.btn:hover {
+	color: #616060;
+}
+
+.btn:active {
+	color: black;
+}
+
+.inner_title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .post_title_div {
 	padding-bottom: 10px;
 }
 
-.post_title {
+.post_title, .ph_title {
 	font-size: 30px;
+	font-weight: 600;
 }
 
 .post_text {
@@ -169,4 +291,37 @@ textarea {
 	font-size: 20px;
 }
 
+/* ----------------------------- */
+
+
+
+
+/* ------- POST HEADER -------*/
+
+.inner_post_header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ph_date {
+	font-size: 20px;
+}
+
+.title_button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.title_button button {
+	padding: 0;
+	font-size: 18px;
+	margin-left: 25px;
+}
+
+.no_posts {
+	text-align: center;
+}
 /* ----------------------------- */

@@ -23,15 +23,24 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    db = get_db()
-    cur = db.execute("""
-    select * from post
-    order by id desc;
-    """)
-    res = cur.fetchall()
-    return render_template("index.html", posts=res)
+    if request.method == "GET":
+        db = get_db()
+        cur = db.execute("""
+            SELECT * FROM post
+            ORDER BY id DESC;      
+        """)
+        res = cur.fetchall()
+        return render_template("index.html", posts=res)
+    else:
+        db = get_db()
+        db.execute("""
+            DELETE FROM POST
+            WHERE id = ?;
+        """, [request.form["id"]])
+        db.commit()
+        return redirect(url_for("index"))
 
 
 @app.route("/new_note", methods=["GET", "POST"])
@@ -40,25 +49,64 @@ def new_note():
         return render_template("new_note.html")
     else:
         now = datetime.datetime.now()
-
         post = request.form["text"]
         title = request.form["title"]
         date = now.strftime("%Y-%m-%d")
         time = now.strftime("%H:%M:%S")
-        print(time, date)
         db = get_db()
         db.execute("""
-            insert into post (post, title, date, time)
-            values
+            INSERT INTO POST (post, title, date, time)
+            VALUES
                 (?, ?, ?, ?);
         """, [post, title, date, time])
         db.commit()
         return redirect(url_for("index"))
 
 
-@app.route("/notes")
+@app.route("/notes", methods=["POST", "GET"])
 def notes():
-    return render_template("notes.html")
+    if request.method == "GET":
+        db = get_db()
+        cur = db.execute("""
+            SELECT * FROM post
+            ORDER BY date DESC, time DESC;
+        """)
+        res = cur.fetchall()
+        return render_template("notes.html", posts=res, input_value="")
+    else:
+
+        db = get_db()
+
+        # Узнаем какой запрос: на удаление или что-то другое
+        # Если запрос на удаление
+        if request.form.get("id"):
+            print(request.form["id"])
+            db.execute("""
+                        DELETE FROM post
+                        WHERE id = ?;
+                    """, [request.form["id"]])
+            db.commit()
+            return redirect(url_for("notes"))
+        # Если запрос на сортировку
+        elif request.form.get("direction"):
+            cur = db.execute(f"""
+                        SELECT title, date, time, id
+                        FROM post
+                        ORDER BY date {request.form["direction"]}, time {request.form["direction"]};
+                    """)
+            res = cur.fetchall()
+        # Запрос на поиск заголовка
+        elif request.form.get("title"):
+            cur = db.execute("""
+                SELECT title, date, time, id
+                FROM post
+                WHERE title = ?;
+            """, [request.form["title"]])
+            res = cur.fetchall()
+        else:
+            return redirect(url_for("notes"))
+
+        return render_template("notes.html", posts=res, input_value=f"{request.form.get('title', '')}")
 
 
 if __name__ == "__main__":

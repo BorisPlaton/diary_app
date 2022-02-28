@@ -1,10 +1,18 @@
-{% macro post(title, text, date, time) %}
+{% macro post(id, title, text, date, time) %}
 <div class="post">
 
     <div class="inner_post">
 
         <div class="post_title_div">
-            <span class="post_title">{{ title }}</span>
+            <div class="inner_title">
+
+                <span class="post_title">{{ title }}</span>
+
+                <form action="{{ url_for('index') }}" method="post">
+                    <button type="submit" class="btn" name="id" value="{{ id }}"><i class="fa fa-trash"></i></button>
+                </form>
+
+            </div>
         </div>
 
         <div class="post_text">
@@ -29,6 +37,7 @@
 
     <title>Diary</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 
 </head>
@@ -40,10 +49,11 @@
 
         <div class="inner_header">
 
-            <div class="logo">
-                <span class="logo_text">Diary</span>
-            </div>
-
+            <a class="logo_a" href="{{ url_for('index') }}">
+                <div class="logo">
+                    <span class="logo_text">Diary</span>
+                </div>
+            </a>
             {% block menu %}
 
             <div class="menu">
@@ -62,9 +72,21 @@
         <div class="inner_main">
             {% block content %}
 
+            {% if posts %}
+
             {% for n in posts %}
-            {{ post(n.title, n.post, n.date, n.time) }}
+            {{ post(n.id, n.title, n.post, n.date, n.time) }}
             {% endfor %}
+
+            {% else %}
+
+            <div class="no_posts">
+                <p>It's a good day to write something!
+                    *<a class="text_href" href="{{ url_for('new_note')}}">click</a>*
+                </p>
+            </div>
+
+            {% endif %}
 
             {% endblock %}
         </div>

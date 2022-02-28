@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+
+
+{% macro post_header(title, date, time, id) %}
+
+<div class="post_header">
+    <div class="inner_post_header">
+
+        <div class="title_button">
+            <div><span class="ph_title">{{ title }}</span></div>
+
+            <form action="{{ url_for('notes') }}" method="post">
+                <button type="submit" class="btn" name="id" value="{{ id }}"><i class="fa fa-trash"></i></button>
+            </form>
+
+        </div>
+
+        <div><span class="ph_date">{{ date }}, {{ time }}</span></div>
+
+    </div>
+</div>
+
+{% endmacro %}
+
+
+{% block menu %}
+
+<div class="menu">
+
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('new_note') }}">Write a new note</a>
+
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="setup_buttons">
+    <div class="inner_set_but">
+
+        <form action="{{ url_for('notes') }}" method='post' class="sort_form">
+
+            <div class="sort_buttons">
+
+                <button type="submit" name="direction" class="sort_btn" value="DESC">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+
+                <button type="submit" name="direction" class="sort_btn" value="ASC">
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                </button>
+
+            </div>
+
+        </form>
+
+        <form action="{{ url_for('notes') }}" method='post'>
+
+            <div class="search">
+                <input type="text" name="title" autocomplete="off" value="{{ input_value }}">
+            </div>
+
+            <div class="button_search">
+                <button type="submit" class="search_btn">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<div>
+
+    {% if posts %}
+        {% for i in posts %}
+        {{ post_header(i.title, i.date, i.time, i.id) }}
+        {% endfor %}
+    {% else %}
+    <div class="no_posts">
+        <p>No notes yet.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
