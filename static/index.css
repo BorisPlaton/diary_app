@@ -106,7 +106,7 @@ main {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin: 10px 0 0 0;
+	margin: 10px 0 40px 0;
 	/* background: grey; */
 }
 
@@ -209,7 +209,7 @@ textarea {
 
 .button input:hover {
 	margin-left: 10px;
-	background: #4d898f;
+	background: #545454;
 	color: #fff;
 }
 
@@ -226,7 +226,7 @@ textarea {
 
 /* ------- POST -------*/
 
-.post {
+.post, .post_header {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
@@ -269,7 +269,7 @@ textarea {
 	padding-bottom: 10px;
 }
 
-.post_title {
+.post_title, .ph_title {
 	font-size: 30px;
 	font-weight: 600;
 }
@@ -283,4 +283,37 @@ textarea {
 	font-size: 20px;
 }
 
+/* ----------------------------- */
+
+
+
+
+/* ------- POST HEADER -------*/
+
+.inner_post_header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ph_date {
+	font-size: 20px;
+}
+
+.title_button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.title_button button {
+	padding: 0;
+	font-size: 18px;
+	margin-left: 25px;
+}
+
+.no_posts {
+	text-align: center;
+}
 /* ----------------------------- */

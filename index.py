@@ -28,16 +28,16 @@ def index():
     if request.method == "GET":
         db = get_db()
         cur = db.execute("""
-        select * from post
-        order by id desc;
+            SELECT * FROM post
+            ORDER BY id DESC;      
         """)
         res = cur.fetchall()
         return render_template("index.html", posts=res)
     else:
         db = get_db()
         db.execute("""
-        delete from post
-        where id = ?;
+            DELETE FROM POST
+            WHERE id = ?;
         """, [request.form["id"]])
         db.commit()
         return redirect(url_for("index"))
@@ -55,17 +55,45 @@ def new_note():
         time = now.strftime("%H:%M:%S")
         db = get_db()
         db.execute("""
-            insert into post (post, title, date, time)
-            values
+            INSERT INTO POST (post, title, date, time)
+            VALUES
                 (?, ?, ?, ?);
         """, [post, title, date, time])
         db.commit()
         return redirect(url_for("index"))
 
 
-@app.route("/notes")
+@app.route("/notes", methods=["POST", "GET"])
 def notes():
-    return render_template("notes.html")
+    if request.method == "GET":
+        db = get_db()
+        cur = db.execute("""
+            SELECT * FROM post
+            ORDER BY date DESC;
+        """)
+        res = cur.fetchall()
+        return render_template("notes.html", posts=res)
+    else:
+        if request.form["id"]:
+            db = get_db()
+            db.execute("""
+                        DELETE FROM post
+                        WHERE id = ?;
+                    """, [request.form["id"]])
+            db.commit()
+            return redirect(url_for("notes"))
+        else:
+            db = get_db()
+            title = request.form.get("title", "title")
+            order = request.form.get("direction", "DESC")
+            cur = db.execute(f"""
+                        SELECT title, date
+                        FROM post
+                        WHERE title = ?
+                        ORDER BY date {order};
+                    """, [title])
+            res = cur.fetchall()
+            return render_template("notes.html", posts=res, method="GET")
 
 
 if __name__ == "__main__":
