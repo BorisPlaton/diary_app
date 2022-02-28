@@ -23,7 +23,7 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/", methods=["GET", "POST" ])
+@app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         db = get_db()
@@ -74,24 +74,25 @@ def notes():
         res = cur.fetchall()
         return render_template("notes.html", posts=res)
     else:
-        if request.form["id"]:
-            db = get_db()
+
+        db = get_db()
+
+        # Узнаем какой запрос: на удаление или что-то другое
+        # Если запрос на удаление
+        if request.form.get("id", None):
             db.execute("""
                         DELETE FROM post
                         WHERE id = ?;
                     """, [request.form["id"]])
             db.commit()
             return redirect(url_for("notes"))
-        else:
-            db = get_db()
-            title = request.form.get("title", "title")
-            order = request.form.get("direction", "DESC")
+        # Если запрос на что-то другое
+        elif request.form.get("direction"):
             cur = db.execute(f"""
                         SELECT title, date
                         FROM post
-                        WHERE title = ?
-                        ORDER BY date {order};
-                    """, [title])
+                        ORDER BY date {request.form["direction"]};
+                    """)
             res = cur.fetchall()
             return render_template("notes.html", posts=res, method="GET")
 

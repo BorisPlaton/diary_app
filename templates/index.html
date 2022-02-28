@@ -72,9 +72,21 @@
         <div class="inner_main">
             {% block content %}
 
+            {% if posts %}
+
             {% for n in posts %}
             {{ post(n.id, n.title, n.post, n.date, n.time) }}
             {% endfor %}
+
+            {% else %}
+
+            <div class="no_posts">
+                <p>It's a good day to write something!
+                    *<a class="text_href" href="{{ url_for('new_note')}}">click</a>*
+                </p>
+            </div>
+
+            {% endif %}
 
             {% endblock %}
         </div>

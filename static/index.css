@@ -95,6 +95,14 @@ main {
 	text-align: justify;
 }
 
+.inner_main .no_posts {
+	/* margin-top: 40px; */
+}
+
+.text_href {
+	text-decoration: underline;
+}
+
 /* ----------------------------- */
 
 
@@ -106,7 +114,7 @@ main {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	margin: 10px 0 40px 0;
+	margin: 9px 0 40px 0;
 	/* background: grey; */
 }
 
@@ -121,7 +129,7 @@ main {
 }
 
 .inner_set_but form {
-	width: 60%;
+	width: 75%;
 	/* background: brown; */
 }
 
