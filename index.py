@@ -69,32 +69,44 @@ def notes():
         db = get_db()
         cur = db.execute("""
             SELECT * FROM post
-            ORDER BY date DESC;
+            ORDER BY date DESC, time DESC;
         """)
         res = cur.fetchall()
-        return render_template("notes.html", posts=res)
+        return render_template("notes.html", posts=res, input_value="")
     else:
 
         db = get_db()
 
         # Узнаем какой запрос: на удаление или что-то другое
         # Если запрос на удаление
-        if request.form.get("id", None):
+        if request.form.get("id"):
+            print(request.form["id"])
             db.execute("""
                         DELETE FROM post
                         WHERE id = ?;
                     """, [request.form["id"]])
             db.commit()
             return redirect(url_for("notes"))
-        # Если запрос на что-то другое
+        # Если запрос на сортировку
         elif request.form.get("direction"):
             cur = db.execute(f"""
-                        SELECT title, date
+                        SELECT title, date, time, id
                         FROM post
-                        ORDER BY date {request.form["direction"]};
+                        ORDER BY date {request.form["direction"]}, time {request.form["direction"]};
                     """)
             res = cur.fetchall()
-            return render_template("notes.html", posts=res, method="GET")
+        # Запрос на поиск заголовка
+        elif request.form.get("title"):
+            cur = db.execute("""
+                SELECT title, date, time, id
+                FROM post
+                WHERE title = ?;
+            """, [request.form["title"]])
+            res = cur.fetchall()
+        else:
+            return redirect(url_for("notes"))
+
+        return render_template("notes.html", posts=res, input_value=f"{request.form.get('title', '')}")
 
 
 if __name__ == "__main__":
